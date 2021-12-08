@@ -1,0 +1,80 @@
+<div class="validate-transaction-screen">
+  <app-breadcrumbs [breadcrumbs]="validateScreenBreadcrumbs"></app-breadcrumbs>
+  <ng-container *ngIf="allAccounts?.length > 0">
+    <h3>
+      Select a debit account and a credit account from the lists above and then a list will
+      appear with all the transaction rules available for this accounts. You can choose between seeing transaction
+      rules for a specific credit / debit account or for a pair of accounts.
+    </h3>
+    <div>
+      <mat-button-toggle-group [value]="whichAccounts"
+                               (valueChange)="updateAccountsSelection($event)"
+      >
+        <mat-button-toggle value="both">Debit&Credit</mat-button-toggle>
+        <mat-button-toggle value="debit">Only Debit</mat-button-toggle>
+        <mat-button-toggle value="credit">Only Credit</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="validate-transaction-fields">
+      <mat-form-field *ngIf="whichAccounts === 'both' || whichAccounts === 'debit'">
+        <mat-label>Select a debit account</mat-label>
+        <input type="text"
+               autocomplete="off"
+               placeholder="Debit Account"
+               matInput
+               [formControl]="accountsFormGroup.controls['debitAccount']"
+               [matAutocomplete]="debitAutocomlete">
+        <mat-autocomplete #debitAutocomlete="matAutocomplete">
+          <mat-option *ngFor="let option of debitFilteredAccounts | async" [value]="option.id">
+            {{option.id}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <app-error-viewer [errors]="accountsFormGroup.controls['debitAccount'].errors"></app-error-viewer>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="whichAccounts === 'both' || whichAccounts === 'credit'">
+        <mat-label>Select a credit account</mat-label>
+        <input autocomplete="off"
+               type="text"
+               placeholder="Credit Account"
+               matInput
+               [formControl]="accountsFormGroup.controls['creditAccount']"
+               [matAutocomplete]="creditAutocomplete">
+        <mat-autocomplete #creditAutocomplete="matAutocomplete">
+          <mat-option *ngFor="let option of creditFilteredAccounts | async" [value]="option.id">
+            {{option.id}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <app-error-viewer [errors]="accountsFormGroup.controls['creditAccount'].errors"></app-error-viewer>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="accountsFormGroup.valid" class="available-rules">
+      <div *ngIf="filteredRules && filteredRules.length > 0;else noRules">
+        <ul>
+          <li *ngFor="let rule of filteredRules">
+            Debit account <b>{{rule.debitAccount}}</b> can receive from credit account <b>{{rule.creditAccount}}</b> when
+            <b>{{rule.description}}</b>
+          </li>
+        </ul>
+      </div>
+      <ng-template [ngSwitch]="whichAccounts" #noRules>
+        <h3 *ngSwitchCase="'both'">
+          You don't have any rules for the credit account {{selectedCreditAccount}} and the debit account {{selectedDebitAccount}}.
+          Please add some or change the accounts
+        </h3>
+        <h3 *ngSwitchCase="'credit'">
+          You don't have any rules for the credit account {{selectedCreditAccount}}
+        </h3>
+        <h3 *ngSwitchCase="'debit'">
+          You don't have any rules for the debit account {{selectedDebitAccount}}
+        </h3>
+      </ng-template>
+    </div>
+  </ng-container>
+
+</div>

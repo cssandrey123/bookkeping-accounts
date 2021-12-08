@@ -1,0 +1,17 @@
+@import '../../styles/common';
+
+.breadcrumbs-wrapper {
+  margin-bottom: 20px;
+
+  .breadcrumb-element a {
+    color: $GREEN-1;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .breadcrumb-element:last-child {
+    .separator {
+      display: none;
+    }
+  }
+}
+

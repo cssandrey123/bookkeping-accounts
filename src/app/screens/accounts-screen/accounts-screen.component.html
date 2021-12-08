@@ -1,0 +1,81 @@
+<div class="accunts-screen-wrapper">
+  <span class="screen-title">
+    <span class="color-green-1 first-word">Bookkeeping accounts</span>
+    <span>
+     is an application that let you store some accounts and setup a set of rules of transactions in order to check
+    if a transaction between two accounts is legal or not. Pretty fancy, no?
+    </span>
+  </span>
+  <div>
+    <div>
+      <h4>
+        In order to use this application, you need to upload a CSV with the accounts on which you want to set
+        the transaction rules. The CSV should be in a two columns format having a comma ',' as a separator between the
+        columns. First column represents an unique identifier and the second one is the account name. You can
+        find a list of the valid accounts in Romania
+        <a target="_blank" href="https://drive.google.com/file/d/1VRA8Ygkn8QMTUG-9fSd3lsslLQXml-VD/view?usp=sharing">here</a>
+      </h4>
+      <h4 style="margin:0">
+        Valid accounts example:
+      </h4>
+
+      <div class="accounts-example">
+        <div>
+          ...
+        </div>
+        <div>
+          361,Animale și păsări
+        </div>
+        <div>
+          368,Diferențe de preț la animale și păsări
+        </div>
+        <div>
+          371,Mărfuri
+        </div>
+        <div>
+          378,Diferențe de preț la mărfuri
+        </div>
+        <div>
+          ...
+        </div>
+      </div>
+
+      <h4>
+        After you uploaded your accounts, you can now set some transaction rules. To do that, click on
+        <b>"Transaction Rules"</b> button from below and the transaction rules screen will be prompted to you. There
+        you can add rules between multiple accounts in order to easily see under what circumstances you are allowed
+        to move assets from one account to another.
+      </h4>
+
+      <h4>
+        What remains to be done now is to go to the <b>"Check Transactions Validity"</b> section so that you can check
+        where and from which accounts you can move your assets. As they say, keep your assets close and your transaction rules
+        closer.
+      </h4>
+    </div>
+    <h1>{{dynamicMessage}}</h1>
+    <div class="accounts-screen-actions">
+      <div *ngIf="!allAccounts?.length">
+        <input type="file" accept=".csv" (change)="readCSV($event)">
+      </div>
+      <!--TODO make an route guard to accces routes only if you have accounts saved-->
+      <div class="actions-wrapper" *ngIf="allAccounts?.length > 0">
+        <div>
+          <button [routerLink]="['/rules']"
+                  mat-raised-button
+                  class="background-green-1">
+            <mat-icon>create</mat-icon>Transactions Rules
+          </button>
+        </div>
+        <div>
+          <button [routerLink]="['/validate']"
+                  mat-raised-button
+                  color="warn">
+            <mat-icon>check_circle_outline</mat-icon>
+            Check Transactions Validity
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

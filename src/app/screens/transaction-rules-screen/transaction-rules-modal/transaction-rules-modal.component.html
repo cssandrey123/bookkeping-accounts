@@ -1,0 +1,67 @@
+<div class="rules-modal-wrapper">
+  <h2 *ngIf="!editMode" mat-dialog-title>Add a new rule</h2>
+  <h2 *ngIf="editMode" mat-dialog-title>Edit current rule</h2>
+
+  <mat-dialog-content>
+    <div class="transaction-rules-modal-content" [formGroup]="rulesFormGroup">
+      <mat-form-field>
+        <mat-label>Debit Account</mat-label>
+        <input type="text"
+               autocomplete="off"
+               placeholder="Add a debit account"
+               matInput
+               [formControl]="rulesFormGroup.controls['debitAccount']"
+               [matAutocomplete]="debitAutocomlete">
+        <mat-autocomplete #debitAutocomlete="matAutocomplete">
+          <mat-option *ngFor="let option of debitFilteredAccounts | async" [value]="option.id">
+            {{option.id}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <app-error-viewer [errors]="rulesFormGroup.controls['debitAccount'].errors"></app-error-viewer>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Credit Account</mat-label>
+        <input autocomplete="off"
+               type="text"
+               placeholder="Add a credit account"
+               matInput
+               [formControl]="rulesFormGroup.controls['creditAccount']"
+               [matAutocomplete]="creditAutocomplete">
+        <mat-autocomplete #creditAutocomplete="matAutocomplete">
+          <mat-option *ngFor="let option of creditFilteredAccounts | async" [value]="option.id">
+            {{option.id}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <app-error-viewer [errors]="rulesFormGroup.controls['creditAccount'].errors"></app-error-viewer>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Rule description</mat-label>
+        <textarea matInput
+                  placeholder="Add a rule description"
+                  [formControl]="rulesFormGroup.controls['description']">
+        </textarea>
+        <mat-error>
+          <app-error-viewer [errors]="rulesFormGroup.controls['description'].errors"></app-error-viewer>
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="">
+    <button mat-button mat-dialog-close >Cancel</button>
+    <button [disabled]="rulesFormGroup.invalid"
+            mat-button
+            (click)="saveRule()"
+            cdkFocusInitial
+    >
+      Save Rule
+    </button>
+  </mat-dialog-actions>
+</div>
+

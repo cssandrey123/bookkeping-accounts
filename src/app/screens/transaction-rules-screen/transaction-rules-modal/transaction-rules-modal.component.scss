@@ -1,0 +1,12 @@
+.rules-modal-wrapper {
+  width: 550px;
+}
+
+.transaction-rules-modal-content {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    height: 60px;
+  }
+}

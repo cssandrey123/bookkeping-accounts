@@ -1,0 +1,54 @@
+@import "../../../common/styles/common";
+
+:host {
+  @extend .flex-container
+}
+
+.table-container {
+  @extend .flex-container;
+  overflow: auto;
+  max-height: 500px;
+
+  .table-row td{
+    border-bottom-width: 0;
+  }
+
+  .table-detailed-row {
+    height: 0;
+  }
+
+  .table-no-data-row {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .table-row:not(.table-expended-row):hover {
+    background: whitesmoke;
+  }
+
+  .table-row:not(.table-expended-row):active {
+    background: #efefef;
+  }
+
+  .detailed-row-wrapper {
+    overflow: hidden;
+    display: flex;
+    margin-left: -10px;
+
+    .detailed-row-container {
+      padding: 10px 0;
+
+      .detailed-row-actions {
+        padding-left: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+    }
+  }
+
+}
+

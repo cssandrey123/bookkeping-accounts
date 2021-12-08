@@ -1,0 +1,26 @@
+<div>
+  <app-breadcrumbs [breadcrumbs]="transactionRulesBreadcrumbs"></app-breadcrumbs>
+  <ng-container *ngIf="allAccounts">
+    <h3>
+      In this screen, you can view, add, edit or delete your transaction rules. To edit or delete a rule
+      , click on that rule in the table below and perform that action. If you want to navigate back, click on
+      "accounts" link from the top navigation.
+    </h3>
+    <div>
+      <button (click)="addTransactionRule()"
+              mat-raised-button
+              class="background-green-1">Add Rule</button>
+    </div>
+    <div class="table-wrapper">
+      <app-transaction-rules-table
+        [transactionRules]="allRules"
+        (deleteRuleAction)="deleteRule($event)"
+        (editRuleAction)="editRule($event)"
+      >
+
+      </app-transaction-rules-table>
+    </div>
+  </ng-container>
+</div>
+
+

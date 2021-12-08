@@ -1,0 +1,29 @@
+//Variables
+
+$GRAY-1: #f2f2f2;
+$GRAY-2: #fafafa;
+$GREEN-1: #30c45d;
+
+
+//Classes
+
+.color-green-1 {
+  color: $GREEN-1;
+}
+
+.background-green-1 {
+  background: $GREEN-1;
+  color: #FFFFFF;
+}
+
+.flex-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.box-1 {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: $GRAY-1;
+  padding: 20px;
+}

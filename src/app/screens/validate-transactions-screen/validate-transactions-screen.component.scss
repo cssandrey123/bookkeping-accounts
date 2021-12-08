@@ -1,0 +1,17 @@
+@import "../../common/styles/common";
+
+:host {
+  @extend .flex-container
+}
+
+.validate-transaction-screen {
+  .validate-transaction-fields {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+
+    mat-form-field {
+      width: 300px;
+    }
+  }
+}

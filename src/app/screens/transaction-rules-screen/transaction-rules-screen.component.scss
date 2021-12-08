@@ -1,0 +1,9 @@
+@import "../../common/styles/common";
+
+:host {
+  @extend .flex-container
+}
+
+.table-wrapper {
+  margin-top: 10px;
+}

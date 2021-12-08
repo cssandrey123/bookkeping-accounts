@@ -1,0 +1,6 @@
+<div class="breadcrumbs-wrapper">
+  <span class="breadcrumb-element" *ngFor="let breadcrumb of breadcrumbs">
+    <a [routerLink]="[breadcrumb.route]">{{breadcrumb.name}}</a>
+    <span class="separator"> / </span>
+  </span>
+</div>
